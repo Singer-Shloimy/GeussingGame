@@ -1,0 +1,80 @@
+﻿@model RandomNumbers
+@{
+    ViewData["Title"] = "Home Page";
+    Layout = "_Layout";
+}
+<h1>Guessing Game</h1>
+
+    <h5>Enter a number to start the game
+        <span data-toggle="tooltip" data-placement="bottom" title="If you reached over 5 right answers the game will restart. The scores are not saved."> (Read more).</span></h5>
+
+    <form asp-action="Index" method="post">
+
+        <div asp-validation-summary="All"></div>
+        <div>
+            <label asp-for="guess">Guess a number!</label>
+            <input asp-for="guess" />
+        </div>
+
+        <div>
+            <label>Amount Guessed</label>
+            <input value="@ViewBag.AmountGuessed" readonly />
+        </div>
+        <div>
+            <label>The random number was: @ViewBag.CurrentNumber</label>
+        </div>
+        <button type="submit" class="bg-success">Guess</button>
+        <a asp-action="Index">New Game</a>
+
+        @*<a href="/Home/Index1">Contacts</a>*@
+    </form>
+
+    <footer class="container footer position-fixed  bg-info">
+
+      
+
+            <!-- Copyright -->
+            <div class="footer-copyright text-center ">
+                <div class="w-auto "><h5>The current time is: <span id="clock">8:10:45</span></h5></div>
+             
+            </div>
+            <!-- Copyright -->
+
+        </footer>
+      
+   
+<script>
+       
+        setInterval(showTime, 1000);
+        function showTime() {
+            let time = new Date();
+            let hour = time.getHours();
+            let min = time.getMinutes();
+            let sec = time.getSeconds();
+            am_pm = "AM";
+
+            if (hour > 12) {
+            hour -= 12;
+                am_pm = "PM";
+            }
+            if (hour == 0) {
+            hr = 12;
+                am_pm = "AM";
+            }
+
+            hour = hour < 10 ? "0" + hour : hour;
+            min = min < 10 ? "0" + min : min;
+            sec = sec < 10 ? "0" + sec : sec;
+
+            let currentTime = hour + ":"
+                + min + ":" + sec + am_pm;
+
+            document.getElementById("clock")
+                .innerHTML = currentTime;
+        }
+
+       showTime();
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    })
+</script>
