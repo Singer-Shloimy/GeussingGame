@@ -11,7 +11,7 @@ namespace GeussingGame.Models
     {
         public int guess { get; set; }
         public static int Timers;
-        int randomNumber = new Random().Next(1, 5);
+        int randomNumber = new Random().Next(1, 1000);
         private static int AmountGuessed = 0;
 
         public static string Timer()
